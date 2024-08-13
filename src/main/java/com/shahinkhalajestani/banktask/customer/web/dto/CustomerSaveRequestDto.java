@@ -1,6 +1,8 @@
 package com.shahinkhalajestani.banktask.customer.web.dto;
 
 import com.shahinkhalajestani.banktask.customer.model.CustomerType;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,17 +12,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CustomerSaveRequestDto {
 
+	@NotBlank
+	private String name;
 
-	private String firstName;
-
+	@NotBlank
 	private String lastName;
 
-	private CustomerType type;
+	@NotBlank
+	private CustomerType customerType;
+
 
 	private String faxNumber;
 
-	private String phoneNumber;
 
+	@Pattern(regexp = "^09\\d{8}$\n")
+	private String phoneNumber;
 
 }
 

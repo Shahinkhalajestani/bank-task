@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CustomerSaveDto {
 
-	private String firstName;
+	private String name;
 
 	private String lastName;
 

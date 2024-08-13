@@ -42,7 +42,7 @@ public class AdminCustomerServiceImpl implements AdminCustomerService {
 							new CustomerNotFoundException("customer was not found with customer id : " + customerId));
 			return mapper.toCustomerInquiryDto(customer);
 		}else {
-			var customer = customerDao.findByPhoneNumberLike(phoneNumber)
+			var customer = customerDao.findByPhoneNumber(phoneNumber)
 					.orElseThrow(() -> new CustomerNotFoundException("customer was not found with phone number : " + phoneNumber));
 			return mapper.toCustomerInquiryDto(customer);
 		}

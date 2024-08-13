@@ -42,10 +42,10 @@ public class Customer {
 	@Column(name = "customer_id",nullable = false)
 	private String customerId;
 
-	@Column(name = "first_name",nullable = false)
-	private String firstName;
+	@Column(name = "name",nullable = false)
+	private String name;
 
-	@Column(name = "last_name",nullable = false)
+	@Column(name = "last_name")
 	private String lastName;
 
 	@Column(name = "phone_number",nullable = false)
@@ -63,7 +63,7 @@ public class Customer {
 	private CustomerType customerType;
 
 	public String fullName(){
-		return firstName + " " + lastName;
+		return name + " " + lastName;
 	}
 
 	@Override

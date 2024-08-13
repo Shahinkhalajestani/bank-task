@@ -10,8 +10,6 @@ public interface CustomerDao extends JpaRepository<Customer, Long> {
 
 	Optional<Customer> findByCustomerId(String customerId);
 
-	Optional<Customer> findByPhoneNumberLike(String phoneNumber);
-
 	Optional<Customer> findByPhoneNumber(String phoneNumber);
 
 }
