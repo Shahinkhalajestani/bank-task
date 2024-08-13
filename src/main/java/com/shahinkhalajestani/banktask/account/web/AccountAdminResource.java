@@ -1,5 +1,7 @@
 package com.shahinkhalajestani.banktask.account.web;
 
+import java.util.Collections;
+
 import com.shahinkhalajestani.banktask.account.service.AdminAccountService;
 import com.shahinkhalajestani.banktask.account.web.dto.AccountInquiryResponse;
 import com.shahinkhalajestani.banktask.account.web.dto.AccountSavingRequest;
@@ -37,7 +39,7 @@ public class AccountAdminResource {
 	@GetMapping
 	public ResponseEntity<AccountInquiryResponse> getAccount(@RequestParam("accountId") String accountId) {
 		var accountInquiryDto = adminAccountService.getAccount(accountId);
-		return ResponseEntity.ok(accountAdminResourceMapper.toAccountInquiryResponse(accountInquiryDto));
+		return ResponseEntity.ok(accountAdminResourceMapper.toAccountInquiryResponse(Collections.singleton(accountInquiryDto)));
 	}
 
 }
