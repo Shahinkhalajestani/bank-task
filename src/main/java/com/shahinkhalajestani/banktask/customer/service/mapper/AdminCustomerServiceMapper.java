@@ -3,6 +3,7 @@ package com.shahinkhalajestani.banktask.customer.service.mapper;
 import com.shahinkhalajestani.banktask.customer.service.dto.CustomerInquiryDto;
 import com.shahinkhalajestani.banktask.customer.service.dto.CustomerSaveDto;
 import com.shahinkhalajestani.banktask.customer.model.Customer;
+import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
@@ -13,8 +14,7 @@ public interface AdminCustomerServiceMapper {
 	@Mapping(target = "fullName", expression = "java(customer.fullName())")
 	CustomerInquiryDto toCustomerInquiryDto(Customer customer);
 
-	@Mapping(target = "id" , ignore = true)
-	@Mapping(target = "creationDate", ignore = true)
+	@BeanMapping(ignoreByDefault = true)
 	@Mapping(target = "customerId", expression = "java(java.util.UUID.randomUUID().toString())")
 	Customer toCustomer(CustomerSaveDto customerSaveDto);
 

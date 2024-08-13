@@ -1,16 +1,24 @@
 package com.shahinkhalajestani.banktask.customer.model;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+import com.shahinkhalajestani.banktask.account.model.Account;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -61,6 +69,21 @@ public class Customer {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "customer_type")
 	private CustomerType customerType;
+
+	@ManyToMany(fetch = FetchType.LAZY,cascade = { CascadeType.ALL})
+	@JoinTable(
+			name = "customer_accounts",
+			joinColumns = @JoinColumn(name = "customer_id"),
+			inverseJoinColumns = @JoinColumn(name = "account_id"),
+			indexes = {@Index(name = "idx_customer_account_customer_id",columnList = "customer_id"),
+					@Index(name = "idx_customer_account_account_id",columnList = "account_id")}
+	)
+	private Set<Account> accounts = new HashSet<>();
+
+
+	public void addAccount(Account account) {
+		this.accounts.add(account);
+	}
 
 	public String fullName(){
 		return name + " " + lastName;
