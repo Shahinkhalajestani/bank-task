@@ -11,14 +11,17 @@ public enum ResultStatus {
 
 	CUSTOMER_NOT_FOUND(1001, "customer.not.found"),
 
-	DUPLICATE_RECORD_EXCEPTION(1002, "duplicate.record.exception"),;
+	DUPLICATE_RECORD(1002, "duplicate.record.exception"),
+
+	RECORD_NOT_FOUND(1003, "record.not.found"),
+	INVALID_PARAMETER(1004, "invalid.parameter"),;
 
 	private final int code;
 
-	private final String message;
+	private final String description;
 
-	ResultStatus(int code, String message) {
+	ResultStatus(int code, String description) {
 		this.code = code;
-		this.message = message;
+		this.description = description;
 	}
 }

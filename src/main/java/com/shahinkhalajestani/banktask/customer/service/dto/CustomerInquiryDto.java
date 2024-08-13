@@ -1,4 +1,4 @@
-package com.shahinkhalajestani.banktask.customer.dto;
+package com.shahinkhalajestani.banktask.customer.service.dto;
 
 import com.shahinkhalajestani.banktask.customer.model.CustomerType;
 import lombok.AllArgsConstructor;

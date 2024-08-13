@@ -9,6 +9,6 @@ public class DuplicateRecordException extends BankTaskException{
 
 	@Override
 	public ResultStatus getStatus() {
-		return ResultStatus.DUPLICATE_RECORD_EXCEPTION;
+		return ResultStatus.DUPLICATE_RECORD;
 	}
 }

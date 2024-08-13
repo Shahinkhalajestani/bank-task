@@ -14,4 +14,16 @@ public class ResponseModel {
 	private int code;
 
 	private ResultStatus resultStatus;
+
+	public ResponseModel(ResultStatus resultStatus) {
+		this.code = resultStatus.getCode();
+		this.resultStatus = resultStatus;
+	}
+
+	public static ResponseModel success() {
+		var result = new ResponseModel();
+		result.setResultStatus(ResultStatus.SUCCESS);
+		result.setCode(ResultStatus.SUCCESS.getCode());
+		return result;
+	}
 }
