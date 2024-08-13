@@ -10,10 +10,12 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR)
 public interface AdminCustomerServiceMapper {
 
-//	@Mapping(target = "fullName", expression = "java(customer.fullName())")
+	@Mapping(target = "fullName", expression = "java(customer.fullName())")
 	CustomerInquiryDto toCustomerInquiryDto(Customer customer);
 
-//	@Mapping(target = "customerId", expression = "java(UUID.randomUUID().toString())")
+	@Mapping(target = "id" , ignore = true)
+	@Mapping(target = "creationDate", ignore = true)
+	@Mapping(target = "customerId", expression = "java(java.util.UUID.randomUUID().toString())")
 	Customer toCustomer(CustomerSaveDto customerSaveDto);
 
 }

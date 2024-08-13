@@ -14,7 +14,7 @@ public class CustomerSaveDto {
 
 	private String lastName;
 
-	private CustomerType type;
+	private CustomerType customerType;
 
 	private String faxNumber;
 

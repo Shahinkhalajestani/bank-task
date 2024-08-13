@@ -33,7 +33,6 @@ import org.springframework.data.annotation.CreatedDate;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor
 public class Customer {
 
 	@Id

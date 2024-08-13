@@ -12,7 +12,7 @@ public class CustomerInquiryDto {
 
 	private String fullName;
 
-	private CustomerType type;
+	private CustomerType customerType;
 
 	private String faxNumber;
 
