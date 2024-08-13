@@ -1,5 +1,7 @@
 package com.shahinkhalajestani.banktask.account.service.impl;
 
+import java.util.Set;
+
 import com.shahinkhalajestani.banktask.account.dao.AccountDao;
 import com.shahinkhalajestani.banktask.account.service.dto.AccountInquiryDto;
 import com.shahinkhalajestani.banktask.account.service.dto.AccountSaveDto;
@@ -38,5 +40,11 @@ public class AdminAccountServiceImpl implements AdminAccountService {
 		log.info("going to save account for customer with id : {}", accountSaveDto.getCustomerId());
 		var account = mapper.toAccount(accountSaveDto);
 		adminCustomerService.saveAccountForCustomer(account, accountSaveDto.getCustomerId());
+	}
+
+	@Override
+	public Set<AccountInquiryDto> getCustomerAccounts(String customerId) {
+		var accounts =  adminCustomerService.getCustomerAccounts(customerId);
+		return mapper.toAccountInquiryDtos(accounts);
 	}
 }

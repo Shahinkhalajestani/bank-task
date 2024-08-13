@@ -1,7 +1,10 @@
 package com.shahinkhalajestani.banktask.account.web.mapper;
 
+import java.util.Set;
+
 import com.shahinkhalajestani.banktask.account.service.dto.AccountInquiryDto;
 import com.shahinkhalajestani.banktask.account.service.dto.AccountSaveDto;
+import com.shahinkhalajestani.banktask.account.web.dto.AccountInquiryResourceDto;
 import com.shahinkhalajestani.banktask.account.web.dto.AccountInquiryResponse;
 import com.shahinkhalajestani.banktask.account.web.dto.AccountSavingRequest;
 import org.mapstruct.BeanMapping;
@@ -16,6 +19,10 @@ public interface AccountAdminResourceMapper {
 	AccountSaveDto toAccountSaveDto(AccountSavingRequest accountSavingRequest);
 
 	@BeanMapping(ignoreByDefault = true)
-	AccountInquiryResponse toAccountInquiryResponse(AccountInquiryDto accountInquiryDto);
+	AccountInquiryResourceDto toAccountInquiryResponse(AccountInquiryDto accountInquiryDto);
+
+	default AccountInquiryResponse toAccountInquiryResponse(Set<AccountInquiryDto> accountInquiryDtos) {
+
+	}
 
 }

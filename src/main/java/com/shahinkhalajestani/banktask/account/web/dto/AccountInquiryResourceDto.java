@@ -1,20 +1,23 @@
 package com.shahinkhalajestani.banktask.account.web.dto;
 
 import java.math.BigDecimal;
-import java.util.Set;
 
 import com.shahinkhalajestani.banktask.account.model.AccountStatus;
 import com.shahinkhalajestani.banktask.account.model.AccountType;
-import com.shahinkhalajestani.banktask.base.model.ResponseModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class AccountInquiryResponse extends ResponseModel {
+@NoArgsConstructor
+public class AccountInquiryResourceDto {
 
-	private Set<AccountInquiryResourceDto> accounts;
+	private String accountId;
 
+	private BigDecimal balance;
+
+	private AccountStatus status;
+
+	private AccountType type;
 }
