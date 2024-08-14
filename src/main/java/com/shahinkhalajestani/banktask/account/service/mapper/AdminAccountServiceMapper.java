@@ -18,6 +18,7 @@ public interface AdminAccountServiceMapper {
 	Set<AccountInquiryDto> toAccountInquiryDtos(Set<Account> account);
 
 	@Mapping(target = "accountId", expression = "java(java.util.UUID.randomUUID().toString())")
+
 	Account toAccount(AccountSaveDto accountSaveDto);
 
 }

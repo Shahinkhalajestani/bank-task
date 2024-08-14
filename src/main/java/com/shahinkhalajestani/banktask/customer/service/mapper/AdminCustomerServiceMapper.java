@@ -16,6 +16,7 @@ public interface AdminCustomerServiceMapper {
 
 	@BeanMapping(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 	@Mapping(target = "customerId", expression = "java(java.util.UUID.randomUUID().toString())")
+	@Mapping(target = "creationDate" , expression = "java(java.time.LocalDateTime.now())")
 	Customer toCustomer(CustomerSaveDto customerSaveDto);
 
 }

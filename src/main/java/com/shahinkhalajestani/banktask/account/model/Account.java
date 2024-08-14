@@ -61,6 +61,10 @@ public class Account {
 	@Column(name = "creation_date")
 	private LocalDateTime creationDate;
 
+	@Enumerated(EnumType.STRING)
+	@Column(name = "type")
+	private AccountType type;
+
 	@Override
 	public final boolean equals(Object o) {
 		if (this == o) {

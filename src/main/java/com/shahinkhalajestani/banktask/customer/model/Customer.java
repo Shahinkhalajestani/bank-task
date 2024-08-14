@@ -60,7 +60,6 @@ public class Customer {
 	@Column(name = "phone_number",nullable = false)
 	private String phoneNumber;
 
-	@CreatedDate
 	@Column(name = "creation_date")
 	private LocalDateTime creationDate;
 
