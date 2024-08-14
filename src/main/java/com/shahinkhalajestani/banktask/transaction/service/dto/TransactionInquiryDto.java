@@ -1,4 +1,4 @@
-package com.shahinkhalajestani.banktask.transaction.dto;
+package com.shahinkhalajestani.banktask.transaction.service.dto;
 
 import java.time.LocalDateTime;
 

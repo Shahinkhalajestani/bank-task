@@ -14,7 +14,7 @@ public interface AdminCustomerServiceMapper {
 	@Mapping(target = "fullName", expression = "java(customer.fullName())")
 	CustomerInquiryDto toCustomerInquiryDto(Customer customer);
 
-	@BeanMapping(ignoreByDefault = true)
+	@BeanMapping(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 	@Mapping(target = "customerId", expression = "java(java.util.UUID.randomUUID().toString())")
 	Customer toCustomer(CustomerSaveDto customerSaveDto);
 

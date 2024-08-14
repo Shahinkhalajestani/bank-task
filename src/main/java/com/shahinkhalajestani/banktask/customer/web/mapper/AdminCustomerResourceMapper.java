@@ -17,7 +17,7 @@ public interface AdminCustomerResourceMapper {
 	CustomerSaveDto toCustomerSaveDto(CustomerSaveRequestDto customerSaveRequestDto);
 
 
-	@BeanMapping(ignoreByDefault = true)
+	@BeanMapping(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 	@Mapping(target = "resultStatus", expression = "java(ResultStatus.SUCCESS)")
 	CustomerInquiryResponseDto toCustomerInquiryResponseDto(CustomerInquiryDto customerInquiryDto);
 

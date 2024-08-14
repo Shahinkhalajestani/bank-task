@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.shahinkhalajestani.banktask.transaction.dto.TransactionInquiryDto;
+import com.shahinkhalajestani.banktask.transaction.service.dto.TransactionInquiryDto;
 import com.shahinkhalajestani.banktask.transaction.model.Transaction;
 import jakarta.persistence.criteria.Predicate;
 import org.apache.commons.lang3.StringUtils;

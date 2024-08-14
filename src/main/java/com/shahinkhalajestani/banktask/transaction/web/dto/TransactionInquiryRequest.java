@@ -1,8 +1,7 @@
-package com.shahinkhalajestani.banktask.transaction.dto;
+package com.shahinkhalajestani.banktask.transaction.web.dto;
 
 import java.time.LocalDateTime;
 
-import com.shahinkhalajestani.banktask.transaction.model.TransactionStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransactionResultDto {
+public class TransactionInquiryRequest {
 
 	private String transactionId;
 
@@ -18,8 +17,9 @@ public class TransactionResultDto {
 
 	private String toAccount;
 
-	private TransactionStatus status;
+	private LocalDateTime fromDate;
 
-	private LocalDateTime completionDate;
+	private LocalDateTime toDate;
 
+	private Long amount;
 }

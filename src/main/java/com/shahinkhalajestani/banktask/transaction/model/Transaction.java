@@ -19,7 +19,8 @@ import lombok.Setter;
 		indexes = { @Index(name = "trx_start_end_date_idx", columnList = "start_date, end_date"),
 				@Index(name = "transaction_id", unique = true, columnList = "transaction_id"),
 				@Index(name = "trx_from_account_id_idx", columnList = "from_account_id"),
-				@Index(name = "trx_to_account_id_idx", columnList = "to_account_id") })
+				@Index(name = "trx_to_account_id_idx", columnList = "to_account_id"),
+				@Index(name = "trx_state_idx", columnList = "status")})
 @Setter
 @Getter
 public class Transaction {

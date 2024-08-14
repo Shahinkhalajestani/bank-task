@@ -1,17 +1,13 @@
 package com.shahinkhalajestani.banktask.transaction.service.impl;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
-import com.shahinkhalajestani.banktask.account.model.AccountStatus;
 import com.shahinkhalajestani.banktask.account.service.AdminAccountService;
 import com.shahinkhalajestani.banktask.transaction.dao.TransactionDao;
 import com.shahinkhalajestani.banktask.transaction.dao.TransactionSpecification;
-import com.shahinkhalajestani.banktask.transaction.dto.TransactionInquiryDto;
-import com.shahinkhalajestani.banktask.transaction.dto.TransactionOperationDto;
-import com.shahinkhalajestani.banktask.transaction.dto.TransactionResultDto;
-import com.shahinkhalajestani.banktask.transaction.exception.AccountNotValidForOperationException;
+import com.shahinkhalajestani.banktask.transaction.service.dto.TransactionInquiryDto;
+import com.shahinkhalajestani.banktask.transaction.service.dto.TransactionOperationDto;
+import com.shahinkhalajestani.banktask.transaction.service.dto.TransactionResultDto;
 import com.shahinkhalajestani.banktask.transaction.exception.TransactionOperationFailedException;
 import com.shahinkhalajestani.banktask.transaction.mapper.TransactionServiceMapper;
 import com.shahinkhalajestani.banktask.transaction.model.TransactionStatus;
@@ -41,15 +37,12 @@ public class TransactionServiceImpl implements TransactionService {
 	public TransactionResultDto doTransaction(TransactionOperationDto transactionOperationDto) {
 		var fromAccount = adminAccountService.getAccount(transactionOperationDto.getFromAccount());
 		var toAccount = adminAccountService.getAccount(transactionOperationDto.getToAccount());
-		if (AccountStatus.BLOCKED.equals(fromAccount.getStatus()) || AccountStatus.BLOCKED.equals(toAccount.getStatus())) {
-			throw new AccountNotValidForOperationException("one of the accounts is blocked");
-		}
 		var transaction = transactionServiceMapper.toTransaction(transactionOperationDto);
 		try {
 			adminAccountService.withDrawFromAccount(fromAccount.getAccountId(), transactionOperationDto.getAmount());
 			adminAccountService.depositToAccount(toAccount.getAccountId(), transactionOperationDto.getAmount());
 		} catch (Exception e) {
-			log.error("transaction with transaction Id failed : {}",transaction.getTransactionId());
+			log.error("transaction with transaction Id failed : {}", transaction.getTransactionId());
 			transaction.setStatus(TransactionStatus.FAILED);
 			transactionDao.save(transaction);
 			throw new TransactionOperationFailedException("transaction failed due to error with message : " + e.getMessage());
@@ -60,10 +53,33 @@ public class TransactionServiceImpl implements TransactionService {
 		return transactionServiceMapper.toTransactionResultDto(transaction);
 	}
 
+
 	@Override
 	public Page<TransactionResultDto> searchTransactions(TransactionInquiryDto transactionInquiryDto, Pageable pageable) {
 		var transactions = transactionDao
-				.findAll(TransactionSpecification.getTransactionsByRequest(transactionInquiryDto),pageable);
+				.findAll(TransactionSpecification.getTransactionsByRequest(transactionInquiryDto), pageable);
 		return transactionServiceMapper.toTransactionResultDtoPage(transactions);
+	}
+
+	@Override
+	public void refundFailedTransactions() {
+		var transactions = transactionDao.findByStatus(TransactionStatus.FAILED);
+		transactions.forEach(transaction -> {
+			var refundTransaction = transactionServiceMapper.toRefundTransaction(transaction);
+			try {
+				adminAccountService.depositToAccount(refundTransaction.getToAccountId(), transaction.getAmount());
+			} catch (Exception e) {
+				log.error("refund transaction with transaction Id failed : {}", transaction.getTransactionId());
+				refundTransaction.setStatus(TransactionStatus.FAILED);
+				transactionDao.save(refundTransaction);
+				throw new TransactionOperationFailedException("transaction failed due to error with message : " + e.getMessage());
+			}
+			refundTransaction.setEndDate(LocalDateTime.now());
+			refundTransaction.setStatus(TransactionStatus.SUCCEED);
+			transactionDao.save(refundTransaction);
+			transaction.setStatus(TransactionStatus.CANCELLED);
+			transaction.setEndDate(LocalDateTime.now());
+			transactionDao.save(transaction);
+		});
 	}
 }
