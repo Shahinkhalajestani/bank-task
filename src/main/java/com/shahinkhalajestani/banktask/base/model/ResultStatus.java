@@ -14,7 +14,8 @@ public enum ResultStatus {
 	DUPLICATE_RECORD(1002, "duplicate.record.exception"),
 
 	RECORD_NOT_FOUND(1003, "record.not.found"),
-	INVALID_PARAMETER(1004, "invalid.parameter"),;
+	INVALID_PARAMETER(1004, "invalid.parameter"),
+	ACCOUNT_NOT_FOUND(1005,"account.not.found"),;
 
 	private final int code;
 

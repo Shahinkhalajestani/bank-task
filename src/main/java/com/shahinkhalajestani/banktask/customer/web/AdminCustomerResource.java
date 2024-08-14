@@ -41,7 +41,7 @@ public class AdminCustomerResource {
 			@RequestParam(name = "customerId", required = false) String customerId) {
 		log.info("going to fetch customer with either customer Id or phoneNumber, {},{}"
 				, StringUtils.isNotBlank(customerId) ? customerId : "", StringUtils.isNotBlank(phoneNumber) ? phoneNumber : "");
-		var customerInquiryDto = adminCustomerService.getCustomer(customerId,phoneNumber);
+		var customerInquiryDto = adminCustomerService.getCustomerWithIdOrPhoneNumber(customerId,phoneNumber);
 		return ResponseEntity.ok(mapper.toCustomerInquiryResponseDto(customerInquiryDto));
 	}
 
