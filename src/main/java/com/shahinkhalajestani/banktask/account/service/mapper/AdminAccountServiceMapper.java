@@ -13,14 +13,12 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AdminAccountServiceMapper {
 
-	@BeanMapping(ignoreByDefault = true)
 	AccountInquiryDto toAccountInquiryDto(Account account);
 
-	@BeanMapping(ignoreByDefault = true)
 	Set<AccountInquiryDto> toAccountInquiryDtos(Set<Account> account);
 
-	@BeanMapping(ignoreByDefault = true)
 	@Mapping(target = "accountId", expression = "java(java.util.UUID.randomUUID().toString())")
+
 	Account toAccount(AccountSaveDto accountSaveDto);
 
 }

@@ -27,6 +27,7 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.ToString.Exclude;
 import org.hibernate.proxy.HibernateProxy;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -39,8 +40,8 @@ import org.springframework.data.annotation.CreatedDate;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Customer {
 
 	@Id
@@ -59,7 +60,6 @@ public class Customer {
 	@Column(name = "phone_number",nullable = false)
 	private String phoneNumber;
 
-	@CreatedDate
 	@Column(name = "creation_date")
 	private LocalDateTime creationDate;
 
@@ -78,6 +78,7 @@ public class Customer {
 			indexes = {@Index(name = "idx_customer_account_customer_id",columnList = "customer_id"),
 					@Index(name = "idx_customer_account_account_id",columnList = "account_id")}
 	)
+	@Exclude
 	private Set<Account> accounts = new HashSet<>();
 
 
@@ -94,20 +95,23 @@ public class Customer {
 		if (this == o) {
 			return true;
 		}
-		if (o == null) {
+		if (!(o instanceof Customer customer)) {
 			return false;
 		}
-		Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
-		Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
-		if (thisEffectiveClass != oEffectiveClass) {
-			return false;
-		}
-		Customer customer = (Customer) o;
-		return getId() != null && Objects.equals(getId(), customer.getId());
+
+		return Objects.equals(getId(), customer.getId()) && Objects.equals(getCustomerId(), customer.getCustomerId()) && Objects.equals(getName(), customer.getName()) && Objects.equals(getLastName(), customer.getLastName()) && Objects.equals(getPhoneNumber(), customer.getPhoneNumber()) && Objects.equals(getCreationDate(), customer.getCreationDate()) && Objects.equals(getFaxNumber(), customer.getFaxNumber()) && getCustomerType() == customer.getCustomerType();
 	}
 
 	@Override
-	public final int hashCode() {
-		return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+	public int hashCode() {
+		int result = Objects.hashCode(getId());
+		result = 31 * result + Objects.hashCode(getCustomerId());
+		result = 31 * result + Objects.hashCode(getName());
+		result = 31 * result + Objects.hashCode(getLastName());
+		result = 31 * result + Objects.hashCode(getPhoneNumber());
+		result = 31 * result + Objects.hashCode(getCreationDate());
+		result = 31 * result + Objects.hashCode(getFaxNumber());
+		result = 31 * result + Objects.hashCode(getCustomerType());
+		return result;
 	}
 }

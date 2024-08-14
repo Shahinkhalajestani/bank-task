@@ -22,7 +22,7 @@ public interface AccountAdminResourceMapper {
 	@Mapping(target = "balance", source = "initialBalance")
 	AccountSaveDto toAccountSaveDto(AccountSavingRequest accountSavingRequest);
 
-	@BeanMapping(ignoreByDefault = true)
+	@BeanMapping(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 	AccountInquiryResourceDto toAccountInquiryResourceDto(AccountInquiryDto accountInquiryDto);
 
 	default AccountInquiryResponse toAccountInquiryResponse(Set<AccountInquiryDto> accountInquiryDtos) {
