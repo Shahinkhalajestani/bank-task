@@ -3,6 +3,8 @@ package com.shahinkhalajestani.banktask.account.service.impl;
 import java.util.Set;
 
 import com.shahinkhalajestani.banktask.account.dao.AccountDao;
+import com.shahinkhalajestani.banktask.account.model.Account;
+import com.shahinkhalajestani.banktask.account.service.dto.AccountChangeStateDto;
 import com.shahinkhalajestani.banktask.account.service.dto.AccountInquiryDto;
 import com.shahinkhalajestani.banktask.account.service.dto.AccountSaveDto;
 import com.shahinkhalajestani.banktask.account.exception.AccountNotFoundException;
@@ -30,8 +32,7 @@ public class AdminAccountServiceImpl implements AdminAccountService {
 	@Transactional
 	public AccountInquiryDto getAccount(String accountId) {
 		log.info("gonna fetch account with account id : {}", accountId);
-		var account = accountDao.findByAccountId(accountId)
-				.orElseThrow(() -> new AccountNotFoundException("account not found with account id : " + accountId));
+		var account = findAccount(accountId);
 		return mapper.toAccountInquiryDto(account);
 	}
 
@@ -44,7 +45,20 @@ public class AdminAccountServiceImpl implements AdminAccountService {
 
 	@Override
 	public Set<AccountInquiryDto> getCustomerAccounts(String customerId) {
-		var accounts =  adminCustomerService.getCustomerAccounts(customerId);
+		var accounts = adminCustomerService.getCustomerAccounts(customerId);
 		return mapper.toAccountInquiryDtos(accounts);
+	}
+
+	@Override
+	@Transactional
+	public void changeAccountStatus(AccountChangeStateDto accountChangeStateDto) {
+		var account = findAccount(accountChangeStateDto.getAccountId());
+		account.setStatus(accountChangeStateDto.getStatus());
+		accountDao.save(account);
+	}
+
+	private Account findAccount(String accountId) {
+		return accountDao.findByAccountId(accountId)
+				.orElseThrow(() -> new AccountNotFoundException("account not found with account id : " + accountId));
 	}
 }

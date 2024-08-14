@@ -3,8 +3,10 @@ package com.shahinkhalajestani.banktask.account.web.mapper;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.shahinkhalajestani.banktask.account.service.dto.AccountChangeStateDto;
 import com.shahinkhalajestani.banktask.account.service.dto.AccountInquiryDto;
 import com.shahinkhalajestani.banktask.account.service.dto.AccountSaveDto;
+import com.shahinkhalajestani.banktask.account.web.dto.AccountChangeStateRequest;
 import com.shahinkhalajestani.banktask.account.web.dto.AccountInquiryResourceDto;
 import com.shahinkhalajestani.banktask.account.web.dto.AccountInquiryResponse;
 import com.shahinkhalajestani.banktask.account.web.dto.AccountSavingRequest;
@@ -30,5 +32,8 @@ public interface AccountAdminResourceMapper {
 		accountInquiryResponse.setResultStatus(ResultStatus.SUCCESS);
 		return accountInquiryResponse;
 	}
+
+
+	AccountChangeStateDto toAccountChangeStateDto(AccountChangeStateRequest accountChangeStateRequest);
 
 }
