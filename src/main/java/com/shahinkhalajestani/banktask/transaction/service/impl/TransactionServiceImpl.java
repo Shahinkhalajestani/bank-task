@@ -62,6 +62,7 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
+	@Transactional
 	public void refundFailedTransactions() {
 		var transactions = transactionDao.findByStatus(TransactionStatus.FAILED);
 		transactions.forEach(transaction -> {
