@@ -15,7 +15,9 @@ public enum ResultStatus {
 
 	RECORD_NOT_FOUND(1003, "record.not.found"),
 	INVALID_PARAMETER(1004, "invalid.parameter"),
-	ACCOUNT_NOT_FOUND(1005,"account.not.found"),;
+	ACCOUNT_NOT_FOUND(1005,"account.not.found"),
+	TRANSACTION_OPERATION_FAILED(1006, "transaction.operation.failed"),
+	ACCOUNT_STATE_IS_NOT_VALID(1007, "account.state.not_valid"),;
 
 	private final int code;
 

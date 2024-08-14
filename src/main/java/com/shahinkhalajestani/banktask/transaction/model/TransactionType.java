@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public enum TransactionType {
 
-	DEPOSIT(0),WITHDRAW(1),REFUND(2);
+	PAYMENT(0),REFUND(1);
 
 	private final int value;
 

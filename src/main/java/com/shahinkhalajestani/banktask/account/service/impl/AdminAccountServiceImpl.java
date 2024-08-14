@@ -1,5 +1,6 @@
 package com.shahinkhalajestani.banktask.account.service.impl;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 import com.shahinkhalajestani.banktask.account.dao.AccountDao;
@@ -54,6 +55,22 @@ public class AdminAccountServiceImpl implements AdminAccountService {
 	public void changeAccountStatus(AccountChangeStateDto accountChangeStateDto) {
 		var account = findAccount(accountChangeStateDto.getAccountId());
 		account.setStatus(accountChangeStateDto.getStatus());
+		accountDao.save(account);
+	}
+
+	@Override
+	public void depositToAccount(String accountId, Long amount) {
+		var account = findAccount(accountId);
+		var initialBalance = account.getBalance();
+		account.setBalance(initialBalance.add(new BigDecimal(amount)));
+		accountDao.save(account);
+	}
+
+	@Override
+	public void withDrawFromAccount(String accountId, Long amount) {
+		var account = findAccount(accountId);
+		var initialBalance = account.getBalance();
+		account.setBalance(initialBalance.subtract(new BigDecimal(amount)));
 		accountDao.save(account);
 	}
 

@@ -55,5 +55,6 @@ public class Transaction {
 	public Transaction() {
 		this.startDate = LocalDateTime.now();
 		this.status = TransactionStatus.IN_PROGRESS;
+		this.type = TransactionType.PAYMENT;
 	}
 }

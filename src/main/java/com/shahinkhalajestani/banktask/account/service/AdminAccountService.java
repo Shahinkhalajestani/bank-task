@@ -16,4 +16,8 @@ public interface AdminAccountService {
 	Set<AccountInquiryDto> getCustomerAccounts(String customerId);
 
 	void changeAccountStatus(AccountChangeStateDto accountChangeStateDto);
+
+	void withDrawFromAccount(String accountId, Long amount);
+
+	void depositToAccount(String accountId, Long amount);
 }
