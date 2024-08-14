@@ -1,0 +1,253 @@
+{
+	"info": {
+		"_postman_id": "4880444a-1f6a-4d3e-80ee-49eb63cfd0b6",
+		"name": "bank-task-collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getCustomer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/admin/customer?phoneNumber=09129876221",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"admin",
+						"customer"
+					],
+					"query": [
+						{
+							"key": "phoneNumber",
+							"value": "09129876221"
+						},
+						{
+							"key": "customerId",
+							"value": "ced3fc23-2a55-478b-ab26-9e1b429d7465",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addCustomer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"abdu\",\n    \"lastName\" : \"saldkfjal23\",\n    \"customerType\" : \"REAL\",\n    \"phoneNumber\" : \"09129876221\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/admin/customer",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"admin",
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAccount",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/admin/account?accountId=2db73f58-2679-467d-bfe3-344e899cfffe",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"admin",
+						"account"
+					],
+					"query": [
+						{
+							"key": "accountId",
+							"value": "2db73f58-2679-467d-bfe3-344e899cfffe"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addAccount",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"initialBalance\" : 2000000,\n    \"status\" : \"AVAILABLE\",\n    \"customerId\" : \"45520e24-5fbe-494e-b3c0-08445a3e98ea\",\n    \"type\" : \"LONG_TERM_DEPOSIT\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/admin/account",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"admin",
+						"account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCustomerAccounts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/admin/account/customer-accounts/b40e0493-ab28-4119-a36d-0b400b8d30ca",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"admin",
+						"account",
+						"customer-accounts",
+						"b40e0493-ab28-4119-a36d-0b400b8d30ca"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "changeAccountStatus",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"accountId\" : \"2db73f58-2679-467d-bfe3-344e899cfffe\",\n    \"status\" : \"AVAILABLE\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/admin/account/change-state",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"admin",
+						"account",
+						"change-state"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTransactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base-url}}/transactions?page=0&size=10&toAccount=2db73f58-2679-467d-bfe3-344e899cfffe",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"transactions"
+					],
+					"query": [
+						{
+							"key": "fromAccount",
+							"value": "2db73f58-2679-467d-bfe3-344e899cfffe",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "toAccount",
+							"value": "2db73f58-2679-467d-bfe3-344e899cfffe"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "doTransaction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\" : 1000000,\n    \"fromAccount\" : \"6c06f3d5-666a-4d23-93cb-9e6411cd0be4\",\n    \"toAccount\" : \"2db73f58-2679-467d-bfe3-344e899cfffe\"\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base-url}}/transactions",
+					"host": [
+						"{{base-url}}"
+					],
+					"path": [
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base-url",
+			"value": "http://localhost:7098/bank-task/api",
+			"type": "default"
+		}
+	]
+}
