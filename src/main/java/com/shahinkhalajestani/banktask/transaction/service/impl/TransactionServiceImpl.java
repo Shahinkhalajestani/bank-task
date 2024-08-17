@@ -71,7 +71,7 @@ public class TransactionServiceImpl implements TransactionService {
 				adminAccountService.depositToAccount(refundTransaction.getToAccountId(), transaction.getAmount());
 			} catch (Exception e) {
 				log.error("refund transaction with transaction Id failed : {}", transaction.getTransactionId());
-				refundTransaction.setStatus(TransactionStatus.FAILED);
+				refundTransaction.setStatus(TransactionStatus.FOLLOW_UP);
 				transactionDao.save(refundTransaction);
 				throw new TransactionOperationFailedException("transaction failed due to error with message : " + e.getMessage());
 			}
